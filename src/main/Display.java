@@ -13,7 +13,7 @@ public class Display extends JPanel {
 
     JFrame jFrame;
 
-    public Display(int screenWidth, int screenHeight) {
+    public Display(int screenWidth, int screenHeight, Keyboard keyboard) {
         jFrame = new JFrame("Chip8 - mdmarshmallow");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         byte[][] startScreen = new byte[64][32];
@@ -22,6 +22,7 @@ public class Display extends JPanel {
                 gfx[i][j] = 0;
             }
         }
+        jFrame.addKeyListener(keyboard);
         jFrame.add(this);
         jFrame.pack();
         jFrame.setSize(screenWidth, screenHeight); // This will need to be changed depending on computer

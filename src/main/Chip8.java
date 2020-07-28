@@ -25,7 +25,7 @@ public class Chip8 {
 
     boolean redraw;
 
-    boolean[] keyIsPressed = new boolean[16]; // stores the state of the keypad
+    boolean[] keyIsPressed; // stores the state of the keypad
 
     public byte[][] gfx = new byte[64][32]; // the display
 
@@ -69,7 +69,7 @@ public class Chip8 {
     }
 
     // the basic CPU cycle, should run at 60 Hz
-    public void cycle() {
+    public void cycle(boolean[] keyIsPressed) {
         // fetch
         int inst1 = memory[pc] << 8;
         int inst2 = memory[pc + 1];

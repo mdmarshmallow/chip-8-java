@@ -9,8 +9,8 @@ public class Game {
     static final int SCREEN_HEIGHT = 450;
     static final int CPU_HZ = 500;
 
-    JFrame jFrame;
-    Display display = new Display(SCREEN_WIDTH, SCREEN_HEIGHT);
+    Keyboard keyboard = new Keyboard();
+    Display display = new Display(SCREEN_WIDTH, SCREEN_HEIGHT, keyboard);
     Chip8 chip8 = new Chip8();
 
     private Game(String game) {
@@ -37,7 +37,7 @@ public class Game {
         while (true) {
             long loopStartTime = System.nanoTime();
 
-            chip8.cycle();
+            chip8.cycle(keyboard.keyIsPressed);
 
             if (chip8.redraw) {
                 display.redraw(chip8.gfx);
@@ -50,7 +50,7 @@ public class Game {
 
     //TODO: implement function to get key presses
     public static void main(String[] args) {
-        String gameName = "PONG";
+        String gameName = "INVADERS";
         Game game = new Game(gameName);
         game.runGame();
     }
