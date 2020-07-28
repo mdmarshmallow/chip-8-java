@@ -9,11 +9,30 @@ public class Display extends JPanel {
     int width = 64 * scale;
     int height = 32 * scale;
 
-    byte[][] gfx;
+    byte[][] gfx = new byte[64][32];
 
-    public void setGfx(byte[][] gfx) {
-        this.gfx = gfx;
+    JFrame jFrame;
+
+    public Display(int screenWidth, int screenHeight) {
+        jFrame = new JFrame("Chip8 - mdmarshmallow");
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        byte[][] startScreen = new byte[64][32];
+        for (int i = 0; i < startScreen.length; i++) {
+            for (int j = 0; j < startScreen[i].length; j++) {
+                gfx[i][j] = 0;
+            }
+        }
+        jFrame.add(this);
+        jFrame.pack();
+        jFrame.setSize(screenWidth, screenHeight); // This will need to be changed depending on computer
+        jFrame.setVisible(true);
     }
+
+    public void redraw(byte[][] gfx) {
+        this.gfx = gfx;
+        repaint();
+    }
+
 
     @Override
     public void paintComponent(Graphics g) {
